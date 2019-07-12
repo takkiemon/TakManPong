@@ -11,12 +11,18 @@ public class PaddleBehavior : MonoBehaviour
     public float maxHeight;
     public float minHeight;
 
+    private Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
         score = 0;
-        maxHeight = 5.5f;
-        minHeight = -3.5f;
+
+        Vector3 tempVec3 = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, 0));
+        maxHeight = tempVec3.y - transform.localScale.y * 0.5f;
+        tempVec3 = cam.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        minHeight = tempVec3.y + transform.localScale.y * 0.5f;
     }
 
     // Update is called once per frame
