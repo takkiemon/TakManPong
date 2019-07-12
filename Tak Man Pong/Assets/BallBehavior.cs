@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class BallBehavior : MonoBehaviour
@@ -9,6 +10,8 @@ public class BallBehavior : MonoBehaviour
     public float ballSpeed;
     public int leftScore;
     public int rightScore;
+    public Text leftTextScore;
+    public Text rightTextScore;
 
     private Camera cam;
     private float maxheight;
@@ -69,13 +72,16 @@ public class BallBehavior : MonoBehaviour
 
         if (storedPosition.x > rightBoundary + gameObject.transform.localScale.x * 0.5f)
         {
-            rightScore++;
+            leftScore++;
             SpawnBall(true);
         } else if (storedPosition.x < leftBoundary - gameObject.transform.localScale.x * 0.5f)
         {
-            leftScore++;
+            rightScore++;
             SpawnBall(false);
         }
+
+        leftTextScore.text = "" + leftScore;
+        rightTextScore.text = "" + rightScore;
 
         gameObject.transform.position = storedPosition;
     }
